@@ -1,4 +1,4 @@
-enum ElementTypes {
+enum InputType {
   "text",
   "checkbox",
 }
@@ -18,7 +18,7 @@ export interface Element {
    * @unique
    */
   id: string;
-  type: ElementTypes;
+  type: InputType;
   label: string;
   /**
    * @default false
@@ -33,11 +33,11 @@ export interface Element {
 
 // narrow element's type based on `type` property
 export type CheckboxElement = Element & {
-  type: ElementTypes.checkbox;
+  type: InputType.checkbox;
   choices: Choice[];
 };
 export type TextElement = Element & {
-  type: ElementTypes.text;
+  type: InputType.text;
   choices?: never;
 };
 
