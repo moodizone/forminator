@@ -1,11 +1,11 @@
 import { Box, Grid } from "@mui/material";
 import { useParams } from "react-router";
+import { ErrorBoundary } from "react-error-boundary";
 
 import FormBuilder from "../components/Form/FormBuilder";
 import JSONEditor from "../components/Form/JSONEditor";
 import { useFormSlice } from "../store/form";
 import { FormContext, FormProvider } from "../components/Form/FormProvider";
-import { ErrorBoundary } from "react-error-boundary";
 import Alert from "../components/Alert/Alert";
 
 function Content() {
@@ -32,12 +32,12 @@ function Content() {
             <JSONEditor />
           </Grid>
           <Grid item xs={12} md={6}>
-            {/* reset the FormBuilder whenever `stringifyForm` */}
             <FormContext.Consumer>
               {({ stringifyForm }) => {
                 return (
                   <ErrorBoundary
                     FallbackComponent={Alert}
+                    // reset the FormBuilder whenever `stringifyForm` changes
                     resetKeys={[stringifyForm]}
                   >
                     <FormBuilder />

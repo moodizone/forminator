@@ -6,6 +6,7 @@ import {
   CssBaseline,
   PaletteMode,
 } from "@mui/material";
+
 import Header from "./layout/Header";
 import Sidebar from "./layout/Sidebar";
 import Router from "./router";

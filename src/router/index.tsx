@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router";
+
 import Content from "../layout/Content";
 import Notfound from "./Notfound";
 

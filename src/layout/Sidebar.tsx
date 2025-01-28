@@ -7,9 +7,9 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
+import { Link } from "react-router";
 
 import { useFormSlice } from "../store/form";
-import { Link } from "react-router";
 
 interface PropsType {
   mobileOpen: boolean;
