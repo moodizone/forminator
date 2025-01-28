@@ -24,21 +24,25 @@ function FormBuilder() {
     // resolver: yupResolver(validationSchema(elements)),
   });
   const { stringifyForm } = useFormProvider();
-  const form: Form = React.useMemo(
-    () => JSON.parse(stringifyForm),
-    [stringifyForm]
-  );
-  const isEmptyForm = Object.keys(form).length === 0;
+  const form: Form = React.useMemo(() => {
+    return JSON.parse(stringifyForm);
+  }, [stringifyForm]);
+  const hasName = "name" in form;
+  const hasElement = form.elements && Object.keys(form.elements).length > 0;
 
-  if (isEmptyForm) return null;
+  if (!hasName && !hasElement) return null;
 
   return (
     <Card sx={{ maxWidth: 480, margin: "auto", padding: 2 }}>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          {form.name}
-        </Typography>
-        <Divider sx={{ marginY: 2 }} />
+        {hasName ? (
+          <>
+            <Typography variant="h6" gutterBottom>
+              {form.name}
+            </Typography>
+            <Divider sx={{ marginY: 2 }} />
+          </>
+        ) : null}
         <form
           id={form.id}
           style={{ display: "flex", flexDirection: "column", gap: 12 }}
@@ -83,11 +87,11 @@ function FormBuilder() {
             />
           ))}
 
-          {isEmptyForm ? null : (
+          {hasElement ? (
             <Button variant="contained" color="primary" fullWidth>
               {"Submit"}
             </Button>
-          )}
+          ) : null}
         </form>
       </CardContent>
     </Card>

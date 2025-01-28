@@ -1,6 +1,6 @@
 export enum InputType {
-  "text",
-  "checkbox",
+  "text" = "text",
+  "checkbox" = "checkbox",
 }
 
 export interface Form {
