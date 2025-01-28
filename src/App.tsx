@@ -6,9 +6,9 @@ import {
   CssBaseline,
   PaletteMode,
 } from "@mui/material";
-import Sidebar from "./components/layout/Sidebar";
-import Header from "./components/layout/Header";
-import Content from "./components/layout/Content";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
+import Router from "./router";
 
 function getTheme(mode: PaletteMode) {
   return createTheme({
@@ -62,7 +62,7 @@ function App() {
           handleDrawerToggle={handleDrawerToggle}
           mobileOpen={mobileOpen}
         />
-        <Content />
+        <Router />
       </Box>
     </ThemeProvider>
   );
