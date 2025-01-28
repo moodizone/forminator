@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Box, TextField, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import FormBuilder from "../Form/FormBuilder";
+import JSONEditor from "../Form/JSONEditor";
 
 function Content() {
-  const [jsonSchema, setJsonSchema] = React.useState<string>("");
-  const deferredSchema = React.useDeferredValue(jsonSchema);
+  const [deferredValue, setDeferredValue] = React.useState<string>("");
 
   return (
     <Box
@@ -21,25 +21,9 @@ function Content() {
     >
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField
-            label="JSON Schema"
-            multiline
-            rows={20}
-            fullWidth
-            variant="outlined"
-            value={jsonSchema}
-            onChange={(event) => {
-              setJsonSchema(event.target.value);
-            }}
-            sx={{
-              "& .MuiInputBase-root": {
-                fontFamily: "monospace",
-                fontSize: "14px",
-              },
-            }}
-          />
+          <JSONEditor setDeferredValue={setDeferredValue} />
         </Grid>
-        <FormBuilder deferredSchema={deferredSchema} />
+        <FormBuilder deferredValue={deferredValue} />
       </Grid>
     </Box>
   );
