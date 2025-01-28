@@ -1,10 +1,7 @@
 import { Alert as MA } from "@mui/material";
+import { FallbackProps } from "react-error-boundary";
 
-interface PropsType {
-  message: string;
-}
-
-function Alert({ message }: PropsType) {
+function Alert({ error }: FallbackProps) {
   return (
     <MA
       variant="filled"
@@ -19,7 +16,7 @@ function Alert({ message }: PropsType) {
       severity="error"
       icon={false}
     >
-      {message}
+      {error?.message}
     </MA>
   );
 }

@@ -7,6 +7,7 @@ function Router() {
     <Routes>
       <Route path="/" element={<Content />} />
       <Route path="/:id" element={<Content />} />
+      {/* for programmatically usages */}
       <Route path="/404" element={<Notfound />} />
       {/* wild card */}
       <Route path="*" element={<Navigate to={"/404"} />} />
