@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Drawer,
   List,
   ListItemButton,
@@ -52,6 +53,20 @@ function Sidebar({ handleDrawerToggle, mobileOpen }: PropsType) {
                 <ListItemText primary={form.name} />
               </ListItemButton>
             ))}
+            <ListItemButton component={Link} to={`/`}>
+              <Button
+                variant="outlined"
+                sx={{
+                  borderStyle: "dashed",
+                  borderColor: "primary.main",
+                  "&:hover": {
+                    borderStyle: "dashed",
+                  },
+                }}
+              >
+                {"Add new form"}
+              </Button>
+            </ListItemButton>
           </List>
         </Box>
       </Drawer>
