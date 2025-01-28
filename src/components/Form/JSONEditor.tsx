@@ -1,30 +1,27 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
+import { useFormProvider } from "./FormProvider";
 
-interface PropsType {
-  stringifyForm: string;
-  setDeferredValue(str: string): void;
-}
-
-function JSONEditor({ setDeferredValue, stringifyForm }: PropsType) {
-  const [jsonSchema, setJsonSchema] = React.useState<string>("");
+function JSONEditor() {
+  const { stringifyForm, setStringifyForm } = useFormProvider();
+  const [value, setValue] = React.useState<string>("");
 
   // reflect the outer changes to the internal state
   React.useEffect(() => {
-    setJsonSchema(stringifyForm);
+    setValue(stringifyForm);
   }, [stringifyForm]);
 
   // improve performance by reducing the number of
   // times the emit logic is called during rapid input changes
   React.useEffect(() => {
     const handler = setTimeout(() => {
-      setDeferredValue(jsonSchema);
+      setStringifyForm(value);
     }, 1000);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [jsonSchema, setDeferredValue]);
+  }, [value, setStringifyForm]);
 
   return (
     <TextField
@@ -33,9 +30,9 @@ function JSONEditor({ setDeferredValue, stringifyForm }: PropsType) {
       rows={20}
       fullWidth
       variant="outlined"
-      value={jsonSchema}
+      value={value}
       onChange={(event) => {
-        setJsonSchema(event.target.value);
+        setValue(event.target.value);
       }}
       sx={{
         "& .MuiInputBase-root": {
