@@ -12,44 +12,59 @@ interface FormState {
 
 const initialState: Form[] = [
   {
-    id: "form1",
-    name: "Sample Form1",
+    id: "login",
+    name: "Login Form",
     elements: [
+      {
+        id: "input1",
+        type: InputType.text,
+        label: "Username",
+        isRequired: true,
+      },
+      {
+        id: "input2",
+        type: InputType.text,
+        label: "Password",
+        isRequired: true,
+      },
       {
         id: "checkbox1",
         type: InputType.checkbox,
-        label: "Select Options",
-        choices: [
-          { id: "choice1", name: "Option 1" },
-          { id: "choice2", name: "Option 2" },
-        ],
-      },
-      {
-        id: "textField1",
-        type: InputType.checkbox,
-        label: "Enter Text",
-        isRequired: true,
+        label: "",
+        choices: [{ id: "choice1", name: "Remember me" }],
       },
     ],
   },
   {
-    id: "form2",
-    name: "Sample Form2",
+    id: "register",
+    name: "Register Form",
     elements: [
       {
-        id: "checkbox",
-        type: InputType.checkbox,
-        label: "Select Options",
-        choices: [
-          { id: "choice1", name: "Option 1" },
-          { id: "choice2", name: "Option 2" },
-        ],
+        id: "input1",
+        type: InputType.text,
+        label: "Username",
+        isRequired: true,
       },
       {
-        id: "textField1",
-        type: InputType.checkbox,
-        label: "Enter Text",
+        id: "input2",
+        type: InputType.text,
+        label: "Password",
         isRequired: true,
+      },
+      {
+        id: "input2",
+        type: InputType.text,
+        label: "Confirm Password",
+        isRequired: true,
+      },
+      {
+        id: "checkbox1",
+        type: InputType.checkbox,
+        label: "I consent to the user agreement including",
+        choices: [
+          { id: "choice1", name: "Terms of services" },
+          { id: "choice1", name: "Remember me" },
+        ],
       },
     ],
   },
