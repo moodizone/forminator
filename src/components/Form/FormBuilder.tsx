@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Grid } from "@mui/material";
 
-import Alert from "../Alert/alert";
+import Alert from "../Alert/Alert";
 
 interface PropsType {
   deferredValue: string;

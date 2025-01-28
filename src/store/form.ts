@@ -12,10 +12,31 @@ interface FormState {
 const initialState: Form[] = [
   {
     id: "form1",
-    name: "Sample Form",
+    name: "Sample Form1",
     elements: [
       {
         id: "checkbox1",
+        type: InputType.checkbox,
+        label: "Select Options",
+        choices: [
+          { id: "choice1", name: "Option 1" },
+          { id: "choice2", name: "Option 2" },
+        ],
+      },
+      {
+        id: "textField1",
+        type: InputType.checkbox,
+        label: "Enter Text",
+        isRequired: true,
+      },
+    ],
+  },
+  {
+    id: "form2",
+    name: "Sample Form2",
+    elements: [
+      {
+        id: "checkbox",
         type: InputType.checkbox,
         label: "Select Options",
         choices: [

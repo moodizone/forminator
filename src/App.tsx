@@ -6,9 +6,9 @@ import {
   CssBaseline,
   PaletteMode,
 } from "@mui/material";
-import Sidebar from "./components/layout/drawer";
-import Header from "./components/layout/header";
-import Content from "./components/layout/content";
+import Sidebar from "./components/layout/Sidebar";
+import Header from "./components/layout/Header";
+import Content from "./components/layout/Content";
 
 function getTheme(mode: PaletteMode) {
   return createTheme({
