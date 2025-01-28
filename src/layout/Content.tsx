@@ -10,10 +10,12 @@ function Content() {
   const { getForm } = useFormSlice();
   const form = getForm(id);
 
-  // id present however can't find correspond form
+  // id present however can't find correspond form data
   if (id && !form) {
     return <Navigate to={"/404"} />;
   } else {
+    const stringifyForm = JSON.stringify(form ?? {}, null, 2);
+
     return (
       <Box
         component="main"
@@ -29,9 +31,12 @@ function Content() {
       >
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <JSONEditor />
+            <JSONEditor
+              stringifyForm={stringifyForm}
+              setDeferredValue={() => void 0}
+            />
           </Grid>
-          <FormBuilder />
+          <FormBuilder stringifyForm={stringifyForm} />
         </Grid>
       </Box>
     );

@@ -4,27 +4,27 @@ import { Grid } from "@mui/material";
 import Alert from "../Alert/Alert";
 
 interface PropsType {
-  deferredValue: string;
+  stringifyForm: string;
 }
 
-function FormBuilder({ deferredValue }: PropsType) {
+function FormBuilder({ stringifyForm }: PropsType) {
   const [error, setError] = React.useState<string | null>(null);
+  const deferredSchema = React.useDeferredValue(stringifyForm);
 
   React.useEffect(() => {
     try {
-      JSON.parse(deferredValue);
       setError(null);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("Something went wrong, that's all we know");
+        setError("Something went wrong, that's all we know!");
       }
     }
-  }, [deferredValue]);
+  }, [stringifyForm]);
   return (
     <Grid item xs={12} md={6}>
-      {error ? <Alert message={error} /> : deferredValue}
+      {error ? <Alert message={error} /> : deferredSchema}
     </Grid>
   );
 }
