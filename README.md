@@ -1,50 +1,118 @@
-# React + TypeScript + Vite
+# Forminator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is a dynamic form generator application built with React and TypeScript. It allows users to create, render, and validate dynamic forms based on a raw schema. The application supports conditional rendering, validation, and state management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Dynamic Form Creation**: Generate forms dynamically based on a raw schema.
+- **Validation**: Enforce field requirements using `React Hook Form` and `Yup`.
+- **State Management**: Utilize `Zustand` for global state management.
+- **Styling**: Built with `Material-UI` (MUI v6) and Emotion.
+- **TypeScript**: Fully typed code for better readability and maintainability.
+- **Testing**: Unit tests implemented using `React Testing Library (RTL)`.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Installation and Setup
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
+Follow the steps below to set up and run the application locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/moodizone/forminator.git
+cd forminator
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the Application
+
+```bash
+npm start
+```
+
+The application will be available at [http://localhost:5173](http://localhost:5173).
+
+---
+
+## Usage
+
+### 1. Input Raw Schema
+
+Paste your form schema in the text area. Example schema:
+
+```json
+{
+  "id": "form1",
+  "name": "Sample Form1",
+  "elements": [
+    {
+      "id": "checkbox1",
+      "type": "checkbox",
+      "label": "Select Options",
+      "choices": [
+        { "id": "choice1", "name": "Option 1" },
+        { "id": "choice2", "name": "Option 2" }
+      ]
     },
-  },
-})
+    {
+      "id": "textField1",
+      "type": "text",
+      "label": "Enter Text",
+      "isRequired": true
+    }
+  ]
+}
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Rendered Form
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The form will dynamically render based on the schema. Example:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- A checkbox with multiple options.
+- A required text field.
+
+### 3. Validation
+
+- If a field is marked as `isRequired`, validation will be enforced.
+- Errors will be displayed below the fields when the form is submitted without valid input.
+
+### 4. Submission
+
+Upon successful validation, form data will be stored and can be retrieve from sidebar.
+
+---
+
+## Testing
+
+- **Unit Tests**: Written using `React Testing Library` (RTL) to validate components, logic, and conditional rendering.
+- Run tests using:
+
+```bash
+npm test
 ```
+
+---
+
+## Deployment
+
+To create a production build, run:
+
+```bash
+npm run build
+```
+
+The build files will be available in the `build` folder.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
