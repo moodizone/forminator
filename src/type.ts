@@ -1,4 +1,4 @@
-enum InputType {
+export enum InputType {
   "text",
   "checkbox",
 }

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Form } from "../../type";
+import { Form, InputType } from "../../type";
 
 interface FormState {
   forms: Form[];
@@ -9,7 +9,29 @@ interface FormState {
   resetSlice(): void;
 }
 
-const initialState: Form[] = [];
+const initialState: Form[] = [
+  {
+    id: "form1",
+    name: "Sample Form",
+    elements: [
+      {
+        id: "checkbox1",
+        type: InputType.checkbox,
+        label: "Select Options",
+        choices: [
+          { id: "choice1", name: "Option 1" },
+          { id: "choice2", name: "Option 2" },
+        ],
+      },
+      {
+        id: "textField1",
+        type: InputType.checkbox,
+        label: "Enter Text",
+        isRequired: true,
+      },
+    ],
+  },
+];
 export const useFormSlice = create<FormState>((set) => ({
   forms: initialState,
   addForm(form) {
