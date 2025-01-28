@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Content from "../layout/Content";
 import Notfound from "./Notfound";
 
@@ -7,8 +7,9 @@ function Router() {
     <Routes>
       <Route path="/" element={<Content />} />
       <Route path="/:id" element={<Content />} />
+      <Route path="/404" element={<Notfound />} />
       {/* wild card */}
-      <Route path="*" element={<Notfound />} />
+      <Route path="*" element={<Navigate to={"/404"} />} />
     </Routes>
   );
 }

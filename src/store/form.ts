@@ -7,6 +7,7 @@ interface FormState {
   updateForm(id: string, updatedForm: Partial<Form>): void;
   deleteForm(id: string): void;
   resetSlice(): void;
+  getForm(id?: Form["id"]): Form | undefined;
 }
 
 const initialState: Form[] = [
@@ -53,7 +54,7 @@ const initialState: Form[] = [
     ],
   },
 ];
-export const useFormSlice = create<FormState>((set) => ({
+export const useFormSlice = create<FormState>((set, get) => ({
   forms: initialState,
   addForm(form) {
     return set((state) => ({
@@ -81,5 +82,13 @@ export const useFormSlice = create<FormState>((set) => ({
   },
   resetSlice() {
     return set({ forms: initialState });
+  },
+  getForm(id) {
+    if (!id) {
+      return undefined;
+    }
+
+    const list = get().forms;
+    return list.find((form) => form.id === id);
   },
 }));
