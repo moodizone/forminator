@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, Grid } from "@mui/material";
-import FormBuilder from "../Form/FormBuilder";
-import JSONEditor from "../Form/JSONEditor";
+import FormBuilder from "../components/Form/FormBuilder";
+import JSONEditor from "../components/Form/JSONEditor";
 
 function Content() {
   const [deferredValue, setDeferredValue] = React.useState<string>("");

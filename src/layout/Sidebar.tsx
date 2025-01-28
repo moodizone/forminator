@@ -6,10 +6,9 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-
 
 import { useFormSlice } from "../store/form";
+import { Link } from "react-router";
 
 interface PropsType {
   mobileOpen: boolean;
@@ -49,11 +48,7 @@ function Sidebar({ handleDrawerToggle, mobileOpen }: PropsType) {
         >
           <List sx={{ width: "100%", maxWidth: 360 }} component="nav">
             {forms.map((form) => (
-              <ListItemButton
-                component={Link}
-                to={`/form/${form.id}`}
-                key={form.id}
-              >
+              <ListItemButton component={Link} to={`/${form.id}`} key={form.id}>
                 <ListItemText primary={form.name} />
               </ListItemButton>
             ))}

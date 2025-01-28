@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Form, InputType } from "../../type";
+import { Form, InputType } from "../type";
 
 interface FormState {
   forms: Form[];
