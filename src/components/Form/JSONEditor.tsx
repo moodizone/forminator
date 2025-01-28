@@ -13,7 +13,7 @@ function JSONEditor({ setDeferredValue }: PropsType) {
   React.useEffect(() => {
     const handler = setTimeout(() => {
       setDeferredValue(jsonSchema);
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearTimeout(handler);
