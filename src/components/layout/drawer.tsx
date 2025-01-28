@@ -6,8 +6,8 @@ interface PropsType {
 }
 
 function Sidebar({ handleDrawerToggle, mobileOpen }: PropsType) {
-  // auto-hides on mobile viewports
-  const isMobile = useMediaQuery("(max-width:750px)");
+  // auto-hides on mobile viewports based on `sm` breakpoint
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Box
       component="nav"

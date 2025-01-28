@@ -36,7 +36,7 @@ function App() {
   // Init
   //================================
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [darkMode, setDarkMode] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(true);
   const theme = getTheme(darkMode ? "dark" : "light");
 
   //================================
