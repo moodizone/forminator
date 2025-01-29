@@ -2,14 +2,16 @@ import * as React from "react";
 import { Button, Grid, TextField } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
 
-import { useFormProvider } from "./FormProvider";
+interface PropsType {
+  stringifyForm: string;
+  setStringifyForm(str: string): void;
+}
 
-function JSONEditor() {
+function JSONEditor({ stringifyForm, setStringifyForm }: PropsType) {
   //================================
   // Init
   //================================
-  const { stringifyForm, setStringifyForm } = useFormProvider();
-  const [value, setValue] = React.useState<string>("");
+  const [value, setValue] = React.useState<string>(stringifyForm);
 
   //================================
   // Handlers

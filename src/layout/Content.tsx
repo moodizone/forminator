@@ -1,17 +1,29 @@
+import * as React from "react";
 import { Box, Grid } from "@mui/material";
 import { useParams } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 
-import FormBuilder from "../components/Form/FormBuilder";
+import FormProvider from "../components/Form/FormProvider";
 import JSONEditor from "../components/Form/JSONEditor";
 import { useFormSlice } from "../store/form";
-import { FormContext, FormProvider } from "../components/Form/FormProvider";
 import Alert from "../components/Alert/Alert";
 
 function Content() {
   const { id } = useParams<{ id: string }>();
   const { getForm } = useFormSlice();
-  const form = getForm(id);
+  const [stringifyForm, setStringifyForm] = React.useState<string | null>(null);
+
+  // update based on changing the URL
+  React.useEffect(() => {
+    const form = getForm(id);
+    const newStringify = JSON.stringify(form ? form : {}, null, 2);
+    setStringifyForm(newStringify);
+  }, [id, getForm]);
+
+  // skip first hydration
+  if (typeof stringifyForm !== "string") {
+    return null;
+  }
 
   return (
     <Box
@@ -26,28 +38,23 @@ function Content() {
         marginTop: "64px",
       }}
     >
-      <FormProvider form={form}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <JSONEditor />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormContext.Consumer>
-              {({ stringifyForm }) => {
-                return (
-                  <ErrorBoundary
-                    FallbackComponent={Alert}
-                    // reset the FormBuilder whenever `stringifyForm` changes
-                    resetKeys={[stringifyForm]}
-                  >
-                    <FormBuilder />
-                  </ErrorBoundary>
-                );
-              }}
-            </FormContext.Consumer>
-          </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={6}>
+          <JSONEditor
+            stringifyForm={stringifyForm}
+            setStringifyForm={setStringifyForm}
+          />
         </Grid>
-      </FormProvider>
+        <Grid item xs={12} md={6}>
+          <ErrorBoundary
+            FallbackComponent={Alert}
+            // reset the FormProvider whenever `stringifyForm` changes
+            resetKeys={[stringifyForm]}
+          >
+            <FormProvider stringifyForm={stringifyForm} />
+          </ErrorBoundary>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

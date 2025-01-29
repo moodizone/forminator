@@ -1,47 +1,47 @@
 import * as React from "react";
-import { Form } from "../../type";
 
-interface ContextType {
-  stringifyForm: string;
-  setStringifyForm(str: string): void;
+import { Element, Form, InputType } from "../../type";
+import { FormData, generateValidationSchema } from "../../validation";
+import FormBuilder from "./FormBuilder";
+
+function setInitialValues(elements?: Element[]): FormData {
+  if (!elements) return {};
+
+  return elements.reduce<FormData>((acc, element) => {
+    if (element.type === InputType.checkbox) {
+      acc[element.id] = [];
+    } else {
+      acc[element.id] = "";
+    }
+    return acc;
+  }, {});
 }
 
 interface PropsType {
-  form?: Form;
+  stringifyForm: string;
 }
 
-const initialState: ContextType = {
-  stringifyForm: "{}",
-  setStringifyForm: () => void 0,
-};
-
-const FormContext = React.createContext<ContextType>(initialState);
-FormContext.displayName = "FormProvider";
-
-function FormProvider({ children, form }: React.PropsWithChildren<PropsType>) {
-  const [stringifyForm, setStringifyForm] = React.useState<string>(
-    initialState.stringifyForm
+function FormProvider({ stringifyForm }: PropsType) {
+  const form: Form = React.useMemo(
+    () => JSON.parse(stringifyForm),
+    [stringifyForm]
   );
-
-  // update internal state with prop changes
-  React.useEffect(() => {
-    setStringifyForm(JSON.stringify(form ?? {}, null, 2));
-  }, [form]);
+  const initialValues = React.useMemo(
+    () => setInitialValues(form.elements),
+    [form.elements]
+  );
+  const validationSchema = React.useMemo(
+    () => generateValidationSchema(form.elements),
+    [form.elements]
+  );
 
   return (
-    <FormContext.Provider value={{ stringifyForm, setStringifyForm }}>
-      {children}
-    </FormContext.Provider>
+    <FormBuilder
+      form={form}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    />
   );
 }
 
-function useFormProvider() {
-  const context = React.useContext(FormContext);
-  if (!context) {
-    throw new Error("`useFormProvider` must be used within a `<FormProvider/>");
-  }
-  return context;
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export { FormProvider, useFormProvider, FormContext };
+export default FormProvider;
