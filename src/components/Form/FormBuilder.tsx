@@ -9,12 +9,12 @@ import {
   Divider,
   FormControlLabel,
   FormGroup,
-  Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { useParams } from "react-router";
+import { useNavigate } from "react-router";
+import { v4 as uuid } from "uuid";
 
 import { Form, InputType } from "../../type";
 import { FormData } from "../../validation";
@@ -31,9 +31,8 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
   //================================
   // Init
   //================================
-  const { id } = useParams<{ id: string }>();
   const { addForm, updateForm, getForm } = useFormSlice();
-
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -52,7 +51,10 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
   // Handlers
   //================================
   function onSave() {
-    const foundedForm = getForm(id);
+    const fallbackId = uuid();
+    const formId = form.id ?? fallbackId;
+    const foundedForm = getForm(formId);
+
     // update
     if (foundedForm) {
       const { id, ...others } = form;
@@ -60,8 +62,9 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
     }
     // add
     else {
-      addForm(form);
+      addForm({ ...form, id: formId });
     }
+    navigate(`/${formId}`);
   }
 
   // reset form upon changing the URL leads to change initial values

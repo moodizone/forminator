@@ -9,7 +9,7 @@ interface PropsType {
 function FormBoard({ values }: PropsType) {
   return (
     <TextField
-      label="JSON Schema"
+      label="Values"
       multiline
       rows={20}
       fullWidth
