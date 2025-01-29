@@ -16,22 +16,22 @@ const initialState: Form[] = [
     name: "Login Form",
     elements: [
       {
-        id: "input1",
+        id: "username",
         type: InputType.text,
         label: "Username",
         isRequired: true,
       },
       {
-        id: "input2",
+        id: "password",
         type: InputType.text,
         label: "Password",
         isRequired: true,
       },
       {
-        id: "checkbox1",
+        id: "remember-me",
         type: InputType.checkbox,
         label: "",
-        choices: [{ id: "choice1", name: "Remember me" }],
+        choices: [{ id: "remember", name: "Remember me" }],
       },
     ],
   },
@@ -40,30 +40,30 @@ const initialState: Form[] = [
     name: "Register Form",
     elements: [
       {
-        id: "input1",
+        id: "username",
         type: InputType.text,
         label: "Username",
         isRequired: true,
       },
       {
-        id: "input2",
+        id: "password",
         type: InputType.text,
         label: "Password",
         isRequired: true,
       },
       {
-        id: "input2",
+        id: "confirm-password",
         type: InputType.text,
         label: "Confirm Password",
         isRequired: true,
       },
       {
-        id: "checkbox1",
+        id: "consent",
         type: InputType.checkbox,
         label: "I consent to the user agreement including",
         choices: [
-          { id: "choice1", name: "Terms of services" },
-          { id: "choice1", name: "Remember me" },
+          { id: "terms", name: "Terms of services" },
+          { id: "policies", name: "Privacy and Policies" },
         ],
       },
     ],
