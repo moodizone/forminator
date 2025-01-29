@@ -92,9 +92,6 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
           <form
             id={form.id}
             noValidate
-            onChange={(e) => {
-              console.log(e);
-            }}
             style={{ display: "flex", flexDirection: "column", gap: 12 }}
           >
             {form.elements?.map((element) => (
