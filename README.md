@@ -15,6 +15,14 @@ This project is a dynamic form generator application built with React and TypeSc
 
 ---
 
+## Demo
+
+You can view a live demo of the Forminator application here:
+
+[https://moodizone.github.io/forminator/](https://moodizone.github.io/forminator/)
+
+---
+
 ## Installation and Setup
 
 Follow the steps below to set up and run the application locally:
