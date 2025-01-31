@@ -37,6 +37,7 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
     control,
     formState: { errors },
     reset,
+    handleSubmit,
     watch,
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -50,6 +51,9 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
   //================================
   // Handlers
   //================================
+  function onSubmit(values: FormData) {
+    console.log(value);
+  }
   function onSave() {
     const fallbackId = uuid();
     const formId = form.id ?? fallbackId;
@@ -92,6 +96,7 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
           <form
             id={form.id}
             noValidate
+            onSubmit={handleSubmit(onSubmit)}
             style={{ display: "flex", flexDirection: "column", gap: 12 }}
           >
             {form.elements?.map((element) => (
@@ -166,6 +171,15 @@ function FormBuilder({ form, validationSchema, initialValues }: PropsType) {
               <>
                 <Button
                   variant="contained"
+                  color="primary"
+                  fullWidth
+                  type="submit"
+                  sx={{ marginBottom: 3 }}
+                >
+                  {"Submit"}
+                </Button>
+                <Button
+                  variant="outlined"
                   color="primary"
                   fullWidth
                   type="button"
